@@ -6,17 +6,16 @@
     %th Description
     %th Image url
     %th
-    %th
-    %th
 
   - @products.each do |product|
-    %tr
+    %tr{class: cycle('list_line_odd', 'list_line_even')}
       %td= product.title
-      %td= product.description
-      %td= product.image_url
-      %td= link_to 'Show', product
-      %td= link_to 'Edit', edit_product_path(product)
-      %td= link_to 'Destroy', product, :confirm => 'Are you sure?', :method => :delete
+      %td= truncate(strip_tags(product.description), length: 80)
+      %td= image_tag product.image_url, class: 'list_image'
+      %td.list_actions
+        %div= link_to 'Show', product
+        %div= link_to 'Edit', edit_product_path(product)
+        %div= link_to 'Destroy', product, :confirm => 'Are you sure?', :method => :delete
 
 %br
 
