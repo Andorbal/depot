@@ -4,6 +4,8 @@ class Product < ActiveRecord::Base
         presence: true
   validates :title,
         uniqueness: true
+  validates_length_of :title, 
+        minimum: 10
   validates :image_url,
         allow_blank: true,
         format: {

@@ -28,11 +28,11 @@ class ProductTest < ActiveSupport::TestCase
     assert product.valid?                 
   end
 
-  def new_product(image_url)
-    Product.new title: "My Book Title",
+  def new_product(opts = {})
+    Product.new({title: "My Book Title",
                 description: "yyy",
                 price: 1,
-                image_url: image_url
+                image_url: "foo.gif"}.merge(opts))
   end
 
   test "image url" do
@@ -41,23 +41,29 @@ class ProductTest < ActiveSupport::TestCase
     bad = %w{ fred.doc fred.gif/more fred.gif.more }
 
     ok.each do |name|
-      assert new_product(name).valid?,
+      assert new_product(image_url: name).valid?,
              "#{name} shouldn't be invalid"
     end
 
     bad.each do |name|
-      assert new_product(name).invalid?,
+      assert new_product(image_url: name).invalid?,
              "#{name} shouldn't be valid"
     end
   end
 
   test "product is not valid without a unique title" do
-    product = Product.new(title: products(:ruby).title,
-                          description: "yyy",
-                          price: 1,
-                          image_url: "fred.gif")
+    product = new_product title: products(:ruby).title
     assert !product.save
     assert_equal I18n.translate('activerecord.errors.messages.taken'),
                  product.errors[:title].join('; ')
+  end
+
+  test "product name must be ten characters or greater" do
+    product = new_product(title: "abcdefghi")
+    assert product.invalid?
+    assert product.errors[:title].any?
+
+    product.title = "abcdefghij"
+    assert product.valid?
   end
 end
