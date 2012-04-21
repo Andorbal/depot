@@ -1,6 +1,9 @@
 - if notice
   %p#notice= notice
 
+- if @access_count > 5
+  #access_count= "Accessed #{pluralize @access_count, 'time'}"
+
 %h1 Your Pragmatic Catalog
 
 - @products.each do |product|

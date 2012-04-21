@@ -10,4 +10,16 @@ class ApplicationController < ActionController::Base
     session[:cart_id] = cart.id
     cart
   end
+
+  def access_count
+    session[:counter] || 1
+  end
+
+  def increment_access_count
+    session[:counter] = access_count + 1
+  end
+
+  def reset_access_count
+    session[:counter] = nil
+  end
 end

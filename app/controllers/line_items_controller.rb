@@ -40,6 +40,7 @@ class LineItemsController < ApplicationController
   # POST /line_items
   # POST /line_items.json
   def create
+    reset_access_count
     @cart = current_cart
     product = Product.find params[:product_id]
     @line_item = @cart.line_items.build product: product
