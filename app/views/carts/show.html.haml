@@ -4,4 +4,4 @@
 %h2 Your Pragmatic Cart
 %ul
   - @cart.line_items.each do |item|
-    %li= item.product.title
+    %li= "#{item.quantity} x #{item.product.title}"
