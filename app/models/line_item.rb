@@ -7,4 +7,8 @@ class LineItem < ActiveRecord::Base
   def total_price
     price * quantity
   end
+
+  def product_title
+    product ? product.title : "No Name"
+  end
 end

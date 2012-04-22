@@ -78,10 +78,10 @@ class LineItemsController < ApplicationController
   def destroy
     @line_item = LineItem.find(params[:id])
     @line_item.destroy
-
+    
     respond_to do |format|
       format.html { redirect_to @line_item.cart,
-        notice: "#{@line_item.product.title} has been removed" }
+        notice: "#{@line_item.product_title} has been removed" }
       format.json { head :no_content }
     end
   end
