@@ -82,7 +82,21 @@ class LineItemsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to @line_item.cart,
         notice: "#{@line_item.product_title} has been removed" }
+      format.js {@cart = @line_item.cart}
       format.json { head :no_content }
+    end
+  end
+
+  def decrement
+    @line_item = LineItem.find params[:id]
+    return destroy if @line_item.quantity == 1
+
+    @line_item.quantity -= 1
+    @line_item.save
+    
+    respond_to do |format|
+      format.html { redirect_to @line_item.cart}
+      format.js {@cart = @line_item.cart}
     end
   end
 end

@@ -2,5 +2,9 @@
   %td= "#{line_item.quantity}x"
   %td= line_item.product_title
   %td.item_price= number_to_currency line_item.total_price
-  %td= button_to 'x', line_item, method: :delete,
-                  confirm: "Are you sure?"
+  %td
+    = button_to 'x', line_item, method: :delete,
+                     confirm: "Are you sure?",
+                     remote: true
+    = button_to '-', line_item_decrement_path(line_item),
+                     remote: true
