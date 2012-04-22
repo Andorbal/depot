@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  product_id: 2
-  price: 12.95
+  product: ruby
   cart_id: 1
+  price: 12.95
 
 two:
-  product_id: 2
+  product: ruby
+  order: one
   price: 9.50
-  cart_id: 1

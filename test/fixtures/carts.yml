@@ -6,6 +6,6 @@
 #
 one:
   id: 1
-  
-two: {}
-#  column: value
+
+two:
+  id: 2
