@@ -25,8 +25,8 @@ ActiveRecord::Schema.define(:version => 20120422171907) do
     t.datetime "updated_at",                                              :null => false
     t.integer  "quantity",                                 :default => 1
     t.decimal  "price",      :precision => 8, :scale => 2
-    t.string   "order_id"
     t.string   "integer"
+    t.integer  "order_id"
   end
 
   create_table "orders", :force => true do |t|
